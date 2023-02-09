@@ -1,4 +1,4 @@
-public class IntStack {
+public class IntStack { //배열로 스텍 구현
     private int[] stk;
     private int capacity;
     private int ptr;

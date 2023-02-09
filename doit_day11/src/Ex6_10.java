@@ -1,4 +1,4 @@
-public class Ex6_10 {
+public class Ex6_10 { // 스텍으로 재귀 퀵정렬 비재귀 화
     static void swap(int[] a, int idx1, int idx2) {
         int box = a[idx1];
         a[idx1] = a[idx2];
