@@ -42,7 +42,7 @@ public class Ex9_1<K,V> {
         return (comparator==null) ? ((Comparable<K>)key1).compareTo(key2) : comparator.compare(key1,key2);
     }
 
-    private V search(K key){
+    public V search(K key){
         Node<K,V> p =root;
 
         while(true){
@@ -80,11 +80,79 @@ public class Ex9_1<K,V> {
             }
         }
     }
-    private void add(K key,V data){
+    public void add(K key,V data){
         if(root==null){
             root = new Node<>(key,data,null,null);
         }else{
             addNode(root,key,data);
         }
+    }
+
+    public boolean remove(K key){
+        Node<K,V> p = root;
+        Node<K,V> parent = null;
+        boolean isLeftChild = true;
+
+        while(true){
+            if(p==null)
+                return false;
+            int cond = comp(p.getKey(), key);
+
+            if(cond==0){
+                break;
+            }else{
+                parent = p;
+                if(cond<0){
+                    p=p.left;
+                    isLeftChild = true;
+                }else{
+                    isLeftChild = false;
+                    p=p.right;
+                }
+            }
+        }
+        if(p.left==null){ // 삭제할 검색 대상을 찾은 상태, 대상의 왼쪽 자식이 없다면
+            if(p==root)
+                root=p.right;
+            else if (isLeftChild) {
+                parent.left = p.right;
+            }else
+                parent.right = p.right;
+        } else if (p.right ==null) {
+            if(p==root){
+                root=p.left;
+            } else if (isLeftChild) {
+                parent.left=p.left;
+            }else
+                parent.right=p.left;
+        }else {
+            parent=p;
+            Node<K,V> left = p.left;
+            isLeftChild = true;
+            while(left.right!=null){
+                parent = left;
+                left = left.right;
+                isLeftChild = false;
+            }
+            p.key = left.key;
+            p.data = left.data;
+            if(isLeftChild)
+                parent.left=left.left;
+            else
+                parent.right=left.right;
+        }
+        return true;
+    }
+
+    private void printSubTree(Node node){
+        if(node!=null){
+            printSubTree(node.left);
+            System.out.println(node.key+" "+node.data);
+            printSubTree(node.right);
+        }
+    }
+
+    public void print(){
+        printSubTree(root);
     }
 }
