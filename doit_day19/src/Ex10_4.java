@@ -1,3 +1,4 @@
+//해시 복습
 import java.util.Scanner;
 
 public class Ex10_4 {

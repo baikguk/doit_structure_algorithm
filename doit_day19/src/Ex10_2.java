@@ -1,3 +1,4 @@
+//해시 복습
 import java.lang.management.MemoryUsage;
 import java.security.SecureRandom;
 import java.util.Scanner;

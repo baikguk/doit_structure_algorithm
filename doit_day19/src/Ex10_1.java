@@ -1,3 +1,4 @@
+//해시 복습
 public class Ex10_1<K,V> {
     class Node<K,V>{
         private K key;
